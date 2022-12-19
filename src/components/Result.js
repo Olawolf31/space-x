@@ -3,12 +3,11 @@ import axios from "axios";
 import Error from "./Error";
 import { useEffect, useState } from "react";
 
-const Success = ({ launchId, setError, error }) => {
+const Result = ({ launchId, setError, error }) => {
   const [launchResult, setLaunchResult] = useState([]);
   const [elapsedTime, setElapsedTime] = useState(null);
 
-  //fetch launch by id
-
+  //fetch space x launch by id
   useEffect(() => {
     let intervalId;
     const fetchLaunchResult = async () => {
@@ -19,6 +18,7 @@ const Success = ({ launchId, setError, error }) => {
         setLaunchResult(response.data);
         setError(false);
 
+        //calculate elapsedtime from launch till current date
         const launchDate = new Date(response.data.date_utc);
         intervalId = setInterval(() => {
           const currentTime = new Date();
@@ -31,25 +31,24 @@ const Success = ({ launchId, setError, error }) => {
       }
     };
     fetchLaunchResult();
+    //cleanup effect
     return () => {
       clearInterval(intervalId);
     };
-  
   }, [launchId, setError]);
 
- 
-  
-
+  //calculating the elapsedtime in hh:mm:ss
   const elapsedTimeInSeconds = Math.floor(elapsedTime / 1000);
   const hours = Math.floor(elapsedTimeInSeconds / 3600);
   const minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60);
   const seconds = elapsedTimeInSeconds % 60;
 
+  //error handling
   if (error) {
     return <Error />;
   }
 
-  //launchStatus indicator
+  //indicator to check launch status
   const launchStatus = launchResult.success
     ? "result__success"
     : "result__fail";
@@ -75,4 +74,4 @@ const Success = ({ launchId, setError, error }) => {
   );
 };
 
-export default Success;
+export default Result;

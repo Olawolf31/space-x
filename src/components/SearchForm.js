@@ -4,13 +4,11 @@ import { useState } from "react";
 const SearchForm = ({ setLaunchId }) => {
   const [searchValue, setSearchValue] = useState("");
 
-  //searchHandler
+  //handle search when form is submitted
   const submitSearch = (event) => {
     event.preventDefault();
-   
-      setLaunchId(searchValue);
-      setSearchValue("");
-    
+    setLaunchId(searchValue);
+    setSearchValue("");
   };
 
   return (
@@ -22,7 +20,7 @@ const SearchForm = ({ setLaunchId }) => {
           onChange={(event) => setSearchValue(event.target.value)}
           placeholder="Search by ID"
         />
-        <input type="submit" value="Submit" />
+        <button>Submit </button>
       </form>
     </div>
   );

@@ -2,13 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const PastLaunches = ({setLaunchId}) => {
+const PastLaunches = ({ setLaunchId }) => {
   const [launches, setLaunches] = useState([]);
 
-  //API URL
+  //API endpoint url
   const url = "https://api.spacexdata.com/v4/launches/past";
 
-  //Fetch Space-X launches
+  //fetch past space x launches
   useEffect(() => {
     const fetchLaunches = async () => {
       try {
@@ -28,8 +28,12 @@ const PastLaunches = ({setLaunchId}) => {
       <div className="past__launches">
         {launches.map((launch) => {
           return (
-            <div className="past__launches__list" key={launch.id} onClick={() => setLaunchId(launch.id)}>
-              <p>{launch.name}</p>
+            <div
+              className="past__launches__list"
+              key={launch.id}
+              onClick={() => setLaunchId(launch.id)}
+            >
+              <h4>{launch.name}</h4>
               <p> #{launch.id}</p>
             </div>
           );

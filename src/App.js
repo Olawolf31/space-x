@@ -1,27 +1,28 @@
-import React from 'react';
+import React from "react";
+import PastLaunches from "./components/PastLaunches";
+import SearchForm from "./components/SearchForm";
+import Success from "./components/Success";
+import { useState } from "react";
 
-const App = () => (
-  <div style={{
-    position: 'fixed',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '1rem',
-  }}
-  >
-    <h1 style={{
-      fontSize: '2rem',
-      fontWeight: 'normal',
-      textAlign: 'center',
-    }}
-    >
-      Find your project instructions in <code style={{ padding: '0 .25em', background: '#e4e4e4' }}>README.md</code>
-    </h1>
-  </div>
-);
+const App = () => {
+  const [launchId, setLaunchId] = useState(null);
+  const [error, setError] = useState(false);
+  return (
+    <>
+      <div className="project__title">Bitgrip Space X Project</div>
+      <SearchForm setLaunchId={setLaunchId} />
+      {launchId && (
+        <Success
+          launchId={launchId}
+          setError={setError}
+          setLaunchId={setLaunchId}
+          error={error}
+        />
+      )}
+
+      <PastLaunches setLaunchId={setLaunchId} />
+    </>
+  );
+};
 
 export default App;

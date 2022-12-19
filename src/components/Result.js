@@ -62,7 +62,7 @@ const Result = ({ launchId, setError, error }) => {
           <div className={launchStatus}></div>
         </div>
 
-        <p>Elapsed time since launch: </p>
+        <p>Elapsed time since launch:</p>
         <div className="countdown">
           <span className="result__countdown">
             {hours} : {minutes} : {seconds}
